@@ -4,6 +4,8 @@ version: 2
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
+
+
 jobs:
   build:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
@@ -61,3 +63,13 @@ jobs:
       - run: ./vendor/bin/phpunit
       #- run: ./vendor/bin/codecept build
       # - run: ./vendor/bin/codecept run
+orbs:
+  aws-elastic-beanstalk: circleci/aws-elastic-beanstalk@2.0.1
+
+workflows:
+    example-workflow:
+      jobs:
+        - aws-elastic-beanstalk/deploy:
+            application-name: Lara8 
+            label: First Setup 
+            platform-version: PHP 
